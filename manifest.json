@@ -1,0 +1,15 @@
+{
+  "name": "Chrome Text Highlighter",
+  "version": "1.0",
+  "description": "Highlight texts in websites and we will keep them for you.",
+  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "options_page": "user_interfaces/options.html",
+  "page_action": {
+    "default_popup": "user_interfaces/popup.html"
+  },
+  "manifest_version": 2
+}

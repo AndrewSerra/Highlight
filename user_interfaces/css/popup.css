@@ -1,0 +1,53 @@
+body {
+  height: 600px;
+  width: 365px;
+}
+
+.title {
+  padding-left: 15px;
+  margin: 25px 0;
+}
+
+ul, li {
+  list-style: none;
+}
+
+.stored-text-list {
+  padding: 0 15px;
+}
+
+.stored-text-list li {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid gray;
+}
+.list-item h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+.list-item:hover {
+  background-color: lightgrey;
+}
+.list-item,
+.list-item:hover {
+  transition: .2s ease-out;
+}
+
+.save-content {
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  margin: 15px 10px;
+  /* left: 50%;
+  transform: translateX(-50%); */
+}
+
+/* .save-content #highlight-note {
+  width: max-content;
+}
+
+.save-content #add-button {
+  width: 20%;
+} */
