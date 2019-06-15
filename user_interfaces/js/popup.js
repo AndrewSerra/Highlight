@@ -24,8 +24,12 @@ chrome.storage.sync.get('storedItems', function(data) {
 addBtn.onclick = () => {
   const note = document.getElementById("highlight-note").value
   let highlightSelection = window.getSelection()
-  let currentURL = document.URL
+  let currentURL;
 
+  chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+    // console.log(tabs[0])
+    currentURL = tabs[0].url
+  })
 
   chrome.storage.sync.get('storedItems', (data) => {
     data["storedItems"].push({
@@ -34,5 +38,8 @@ addBtn.onclick = () => {
       highlight_text: highlightSelection
     })
     console.log(data)
+    chrome.storage.sync.set(data, (stored_data) => {
+      console.log(`Data in storage: ${stored_data}`)
+    })
   })
 }

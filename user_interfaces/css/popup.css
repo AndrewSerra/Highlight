@@ -23,6 +23,13 @@ ul, li {
   padding-bottom: 15px;
   border-bottom: 1px solid gray;
 }
+.list-item li h3,
+.list-item span {
+  padding-left: 5px;
+  padding-right: 5px;
+  width: inherit;
+  display: inline-block;
+}
 .list-item h3 {
   margin-top: 0;
   margin-bottom: 5px;
@@ -37,17 +44,25 @@ ul, li {
 
 .save-content {
   bottom: 0;
+  left: 0;
+  right: 0;
   position: absolute;
-  width: 100%;
+  display: block;
   margin: 15px 10px;
-  /* left: 50%;
-  transform: translateX(-50%); */
 }
-
-/* .save-content #highlight-note {
-  width: max-content;
+.save-content #highlight-note {
+  width: 70%;
+  border-radius: 5px;
+  border: 1px solid gray;
+  text-indent: 15px;
+  height: 20px;
 }
-
 .save-content #add-button {
-  width: 20%;
-} */
+  width: 25%;
+  float: right;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  height: 22px;
+  background-color: transparent;
+  border-radius: 5px;
+}
