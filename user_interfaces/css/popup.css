@@ -14,6 +14,7 @@ ul, li {
 
 .stored-text-list {
   padding: 0 15px;
+  padding-bottom: 52px;
 }
 
 .stored-text-list li {
@@ -46,9 +47,10 @@ ul, li {
   bottom: 0;
   left: 0;
   right: 0;
-  position: absolute;
+  position: fixed;
   display: block;
-  margin: 15px 10px;
+  padding: 10px;
+  background-color: #3b7db78a;
 }
 .save-content #highlight-note {
   width: 70%;
@@ -56,13 +58,15 @@ ul, li {
   border: 1px solid gray;
   text-indent: 15px;
   height: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .save-content #add-button {
   width: 25%;
   float: right;
   margin-top: 1px;
   margin-bottom: 1px;
-  height: 22px;
-  background-color: transparent;
-  border-radius: 5px;
+  height: 30px;
+  /* background-color: transparent; */
+  border-radius: 2px;
 }
