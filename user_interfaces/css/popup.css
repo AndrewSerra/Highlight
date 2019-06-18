@@ -1,4 +1,4 @@
-body {
+html {
   height: 600px;
   width: 365px;
 }
@@ -11,7 +11,9 @@ body {
 ul, li {
   list-style: none;
 }
-
+.stored-text {
+  width: inherit;
+}
 .stored-text-list {
   padding: 0 15px;
   padding-bottom: 52px;
@@ -41,6 +43,15 @@ ul, li {
 .list-item,
 .list-item:hover {
   transition: .2s ease-out;
+}
+
+.no-content-header {
+  text-align: center;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  position: absolute;
 }
 
 .save-content {

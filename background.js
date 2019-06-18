@@ -1,11 +1,5 @@
 const settings = {
-  storedItems: [
-    {
-      note: "test",
-      pageUrl: "www.google.com",
-      highlight_text: "this is an example test"
-    }
-  ]
+  storedItems: []
 }
 chrome.runtime.onInstalled.addListener(function() {
 
