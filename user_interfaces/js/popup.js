@@ -81,14 +81,30 @@ function updateList(data_obj, dom_parent) {
   }
 
   let listItem = document.createElement("li")
+
+  // unslided view of the tab
+  let divHead = document.createElement("div")
   let head = document.createElement("h3")
   let span = document.createElement("span")
 
+  // slided view of the tab
+  let divHighlight = document.createElement("div")
+  let p = document.createElement("p")
+
   head.innerHTML = data_obj.note
   span.innerHTML = data_obj.pageUrl
+  p.innerHTML = data_obj.highlight_text
 
-  listItem.appendChild(head)
-  listItem.appendChild(span)
+  divHead.setAttribute("class", "list-item-div note")
+  divHighlight.setAttribute("class", "list-item-div highlight")
+
+  divHead.appendChild(head)
+  divHead.appendChild(span)
+  listItem.appendChild(divHead)
+
+  divHighlight.appendChild(p)
+  listItem.appendChild(divHighlight)
+
   listItem.setAttribute("class", "list-item")
 
   dom_parent.appendChild(listItem)

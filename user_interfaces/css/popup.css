@@ -5,7 +5,9 @@ html {
 
 .title {
   padding-left: 15px;
-  margin: 25px 0;
+  padding-bottom: 10px;
+  margin: 25px -8px;
+  box-shadow: 0px 5px 5px 0px #c5aeae4d;
 }
 
 ul, li {
@@ -19,14 +21,16 @@ ul, li {
   padding-bottom: 52px;
 }
 
-.stored-text-list li {
+.stored-text-list .list-item {
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 10px;
   padding-bottom: 15px;
   border-bottom: 1px solid gray;
+  display: flex;
+  box-sizing: border-box;
 }
-.list-item li h3,
+.list-item .list-item h3,
 .list-item span {
   padding-left: 5px;
   padding-right: 5px;
@@ -43,6 +47,14 @@ ul, li {
 .list-item,
 .list-item:hover {
   transition: .2s ease-out;
+}
+.list-item-div.highlight {
+  margin-left: 10px;
+  padding-left: 20px;
+}
+.list-item:hover {
+  transition: .5s ease-out;
+  transform: translateX(-100%);
 }
 
 .no-content-header {
