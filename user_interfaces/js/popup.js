@@ -1,18 +1,24 @@
+import { updateList, setMultipleAttributes } from './helpers.js';
+
 let listContainer = document.getElementsByClassName('stored-text')[0]
 let addBtn = document.getElementById('add-button')
 
 chrome.storage.sync.get('storedItems', function(data) {
-  console.log(data)
+  // console.log(data)
 
   // check if the array is empty
   if(data["storedItems"].length !== 0) {
     // create dom elements for each object
     data["storedItems"].forEach((elem) => {
 
-      let list = document.createElement("ul")
-      list.setAttribute("class", "stored-text-list");
-      updateList(elem, list)
-      listContainer.appendChild(list)
+      let mainList = document.getElementsByClassName('stored-text-list')[0]
+      if(mainList === undefined) {
+        mainList = document.createElement("ul")
+        mainList.setAttribute("class", "stored-text-list");
+        listContainer.appendChild(mainList)
+      }
+      updateList(elem, mainList)
+      listContainer.appendChild(mainList)
     })
   }
   else {
@@ -29,13 +35,20 @@ chrome.storage.sync.get('storedItems', function(data) {
 // highlight button click event
 addBtn.onclick = () => {
   const note = document.getElementById("highlight-note").value
-  let   highlightSelection = window.getSelection();
+  let highlightSelection;
   let currentURL;
 
   // get the active tab
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-    // console.log(tabs[0])
+    console.log(tabs[0])
+    let tabIndex = tabs[0].index
     currentURL = tabs[0].url
+
+    chrome.windows.getCurrent({populate: true, windowTypes:["normal"]}, (window) => {
+      console.log(window.tabs[tabIndex])
+      console.log(window.tabs[tabIndex] instanceof Window)
+      highlightSelection = window.getSelection();
+    })
   })
 
   // retrieve the already stored value
@@ -55,7 +68,6 @@ addBtn.onclick = () => {
 
     // add the last note
     data["storedItems"].push(lastNote)
-    console.log(data)
 
     let list = document.getElementsByClassName('stored-text-list')[0]
 
@@ -69,49 +81,7 @@ addBtn.onclick = () => {
 
     // store the new object array
     chrome.storage.sync.set(data, (stored_data) => {
-      console.log(stored_data)
+      //console.log(stored_data)
     })
   })
-}
-
-function updateList(data_obj, dom_parent) {
-
-  if(typeof data_obj !== 'object') {
-    throw "Function updateList has a parameter of type \"object\""
-  }
-
-  let listItem = document.createElement("li")
-
-  // unslided view of the tab
-  let divHead = document.createElement("div")
-  let head = document.createElement("h3")
-  let span = document.createElement("span")
-
-  // slided view of the tab
-  let divHighlight = document.createElement("div")
-  let p = document.createElement("p")
-
-  head.innerHTML = data_obj.note
-  span.innerHTML = data_obj.pageUrl
-  p.innerHTML = data_obj.highlight_text
-
-  divHead.setAttribute("class", "list-item-div note")
-  divHighlight.setAttribute("class", "list-item-div highlight")
-
-  divHead.appendChild(head)
-  divHead.appendChild(span)
-  listItem.appendChild(divHead)
-
-  divHighlight.appendChild(p)
-  listItem.appendChild(divHighlight)
-
-  listItem.setAttribute("class", "list-item")
-
-  dom_parent.appendChild(listItem)
-}
-
-function setMultipleAttributes(elem, attrs) {
-  for(key in attrs) {
-    elem.setAttribute(key, attrs[key])
-  }
 }
