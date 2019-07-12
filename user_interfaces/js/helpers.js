@@ -40,7 +40,24 @@ const setMultipleAttributes = (elem, attrs) => {
   }
 }
 
+const isElementDefined = (elem) => {
+  if(elem === undefined) {
+    return false;
+  }
+  return true;
+}
+
+const isWindowSelected = (tab) => {
+  if (tab.selected === true ) {
+    return true;
+  }
+
+  return false;
+}
+
 export {
   updateList,
-  setMultipleAttributes
+  setMultipleAttributes,
+  isElementDefined,
+  isWindowSelected,
 }

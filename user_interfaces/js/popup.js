@@ -1,4 +1,9 @@
-import { updateList, setMultipleAttributes } from './helpers.js';
+import {
+  updateList,
+  setMultipleAttributes,
+  isElementDefined,
+  isWindowSelected
+} from './helpers.js';
 
 let listContainer = document.getElementsByClassName('stored-text')[0]
 let addBtn = document.getElementById('add-button')
@@ -12,7 +17,7 @@ chrome.storage.sync.get('storedItems', function(data) {
     data["storedItems"].forEach((elem) => {
 
       let mainList = document.getElementsByClassName('stored-text-list')[0]
-      if(mainList === undefined) {
+      if(!isElementDefined(mainList)) {
         mainList = document.createElement("ul")
         mainList.setAttribute("class", "stored-text-list");
         listContainer.appendChild(mainList)
@@ -22,7 +27,7 @@ chrome.storage.sync.get('storedItems', function(data) {
     })
   }
   else {
-    // create message to indicate nothing is saved
+    // create message to indicate nothing is saved yet
     let noContentHeader = document.createElement("h1");
     noContentHeader.innerHTML = "Start Adding Notes!";
     setMultipleAttributes(noContentHeader, {
@@ -40,15 +45,19 @@ addBtn.onclick = () => {
 
   // get the active tab
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-    console.log(tabs[0])
-    let tabIndex = tabs[0].index
-    currentURL = tabs[0].url
+    currentURL = tabs[0].url;
 
-    chrome.windows.getCurrent({populate: true, windowTypes:["normal"]}, (window) => {
-      console.log(window.tabs[tabIndex])
-      console.log(window.tabs[tabIndex] instanceof Window)
-      highlightSelection = window.getSelection();
-    })
+    const executeScriptObj = {
+      file: "user_interfaces/js/selectionInjection.js",
+    }
+
+    // get the selection and text
+    chrome.tabs.executeScript(null, executeScriptObj, function (results) {
+      if (chrome.runtime.lastError || !results || !results.length) {
+        return;  // Permission error, tab closed, etc.
+      }
+      highlightSelection = results[0];
+    });
   })
 
   // retrieve the already stored value
@@ -62,7 +71,7 @@ addBtn.onclick = () => {
     // remove no-content-header if existing
     // same element as noContentHeader
     let noContentHeadMsg = document.getElementsByClassName('no-content-header')[0]
-    if(noContentHeadMsg !== undefined) {
+    if(isElementDefined(noContentHeadMsg)) {
       noContentHeadMsg.style.display = "none";
     }
 
@@ -72,7 +81,7 @@ addBtn.onclick = () => {
     let list = document.getElementsByClassName('stored-text-list')[0]
 
     // update the view
-    if(list === undefined) {
+    if(!isElementDefined(list)) {
       list = document.createElement("ul")
       list.setAttribute("class", "stored-text-list");
       listContainer.appendChild(list)
@@ -81,7 +90,7 @@ addBtn.onclick = () => {
 
     // store the new object array
     chrome.storage.sync.set(data, (stored_data) => {
-      //console.log(stored_data)
+      console.log(stored_data)
     })
   })
 }
