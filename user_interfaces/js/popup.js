@@ -46,51 +46,55 @@ addBtn.onclick = () => {
   // get the active tab
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
     currentURL = tabs[0].url;
+  });
 
-    const executeScriptObj = {
-      file: "user_interfaces/js/selectionInjection.js",
+  const executeScriptObj = {
+    file: "user_interfaces/js/selectionInjection.js",
+  }
+
+  // get the selection and text
+  chrome.tabs.executeScript(null, executeScriptObj, (results) => {
+    if (chrome.runtime.lastError || !results || !results.length) {
+      return;  // Permission error, tab closed, etc.
     }
+  });
 
-    // get the selection and text
-    chrome.tabs.executeScript(null, executeScriptObj, function (results) {
-      if (chrome.runtime.lastError || !results || !results.length) {
-        return;  // Permission error, tab closed, etc.
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+
+    highlightSelection = request.msg;
+
+    // retrieve the already stored value
+    chrome.storage.sync.get('storedItems', (data) => {
+      const lastNote = {
+        note: note,
+        pageUrl: currentURL,
+        highlight_text: highlightSelection
       }
-      highlightSelection = results[0];
-    });
-  })
+      // remove no-content-header if existing
+      // same element as noContentHeader
+      let noContentHeadMsg = document.getElementsByClassName('no-content-header')[0]
+      if(isElementDefined(noContentHeadMsg)) {
+        noContentHeadMsg.style.display = "none";
+      }
 
-  // retrieve the already stored value
-  chrome.storage.sync.get('storedItems', (data) => {
-    const lastNote = {
-      note: note,
-      pageUrl: currentURL,
-      highlight_text: highlightSelection
-    }
+      // add the last note
+      data["storedItems"].push(lastNote)
 
-    // remove no-content-header if existing
-    // same element as noContentHeader
-    let noContentHeadMsg = document.getElementsByClassName('no-content-header')[0]
-    if(isElementDefined(noContentHeadMsg)) {
-      noContentHeadMsg.style.display = "none";
-    }
+      let list = document.getElementsByClassName('stored-text-list')[0]
 
-    // add the last note
-    data["storedItems"].push(lastNote)
+      // update the view
+      if(!isElementDefined(list)) {
+        list = document.createElement("ul")
+        list.setAttribute("class", "stored-text-list");
+        listContainer.appendChild(list)
+      }
+      updateList(lastNote, list)
 
-    let list = document.getElementsByClassName('stored-text-list')[0]
-
-    // update the view
-    if(!isElementDefined(list)) {
-      list = document.createElement("ul")
-      list.setAttribute("class", "stored-text-list");
-      listContainer.appendChild(list)
-    }
-    updateList(lastNote, list)
-
-    // store the new object array
-    chrome.storage.sync.set(data, (stored_data) => {
-      console.log(stored_data)
+      // store the new object array
+      chrome.storage.sync.set(data);
     })
-  })
+  });
 }
