@@ -42,7 +42,6 @@ addBtn.onclick = () => {
   const note = document.getElementById("highlight-note").value
   let highlightSelection;
   let currentURL;
-  let highlightTag;
 
   // get the active tab
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
@@ -50,7 +49,7 @@ addBtn.onclick = () => {
   });
 
   const executeScriptObj = {
-    file: "user_interfaces/js/selectionInjection.js",
+    file: "user_interfaces/js/contentScripts/selectionInjection.js",
   }
 
   // get the selection and text
@@ -66,7 +65,6 @@ addBtn.onclick = () => {
                 "from the extension");
 
     highlightSelection = request.msg;
-    // highlightTag - request.tag;
 
     // retrieve the already stored value
     chrome.storage.sync.get('storedItems', (data) => {
