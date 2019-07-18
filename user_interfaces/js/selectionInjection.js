@@ -1,9 +1,10 @@
 (function() {
-  const highlightSelection = window.getSelection().toString();
-  console.log(highlightSelection);
+  const selection = window.getSelection();
+  console.log(selection);
+  console.log(selection.focusNode.parentNode)
 
   const message = {
-    "msg": highlightSelection
+    "msg": selection.toString(),
   }
 
   chrome.runtime.sendMessage("oakhfhjfahjedfbakjmoidejpfgamfgl", message, (response) => {
