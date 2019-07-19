@@ -29,7 +29,7 @@
       font-weight: normal;
       line-height: 30px;
     }
-    .mini-text:after {
+    .mini-text:before {
       display: block;
       content: '';
       position: absolute;
@@ -40,12 +40,12 @@
       margin-left: 65%;
       z-index: -2;
     }
-    .mini-text:hover:after {
+    .mini-text:hover:before {
       height: 30px;
     }
-    .mini-text:after,
-    .mini-text:hover:after {
-      transition: height .3s;
+    .mini-text:before,
+    .mini-text:hover:before {
+      transition: all 240ms ease-in-out;
     }
     .main .links {
       margin-top: 60px;

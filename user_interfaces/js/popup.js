@@ -39,9 +39,14 @@ chrome.storage.sync.get('storedItems', function(data) {
 
 // highlight button click event
 addBtn.onclick = () => {
-  const note = document.getElementById("highlight-note").value
+  const note = (document.getElementById("highlight-note").value).trim()
   let highlightSelection;
+  let tagSelection;
   let currentURL;
+
+  if (note === "") {
+    return alert("Don't forget to take a note to remember what you highlight!");
+  }
 
   // get the active tab
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
@@ -65,13 +70,17 @@ addBtn.onclick = () => {
                 "from the extension");
 
     highlightSelection = request.msg;
+    tagSelection = request.tag;
+
+    console.log(highlightSelection)
 
     // retrieve the already stored value
     chrome.storage.sync.get('storedItems', (data) => {
       const lastNote = {
         note: note,
         pageUrl: currentURL,
-        highlight_text: highlightSelection
+        highlight_text: highlightSelection,
+        tag: tagSelection
       }
       // remove no-content-header if existing
       // same element as noContentHeader

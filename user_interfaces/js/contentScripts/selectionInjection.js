@@ -12,17 +12,17 @@
   newText = text.replace(re, `$1<span style="background-color:${highlightColor};border-bottom:1px solid ##ffe99aff;">$2</span>$3`);
   tag.innerHTML = newText;
 
-  console.log(selection);
-  console.log(tag);
-  console.log(text);
-  console.log(newText);
+  // console.log(selection);
+  // console.log(tag);
+  // console.log(text);
+  // console.log(newText);
 
   const message = {
     "msg": msg,
+    "tag": tag,
   }
 
   chrome.runtime.sendMessage("oakhfhjfahjedfbakjmoidejpfgamfgl", message, (response) => {
     console.log(response);
   });
-  return message.msg;
 })();
