@@ -9,7 +9,7 @@
 
   const re = new RegExp("(.+)(" + msg + ")(.+)");
   // console.log(re);
-  newText = text.replace(re, `$1<span style=\"background-color:${highlightColor};border-bottom:1px solid ##ffe99aff;\">$2</span>$3`);
+  newText = text.replace(re, `$1<span style="background-color:${highlightColor};border-bottom:1px solid ##ffe99aff;">$2</span>$3`);
   tag.innerHTML = newText;
 
   console.log(selection);
