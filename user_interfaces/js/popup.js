@@ -80,8 +80,10 @@ addBtn.onclick = () => {
         note: note,
         pageUrl: currentURL,
         highlight_text: highlightSelection,
-        tag: tagSelection
+        tag: tagSelection,
+        projectId: 0,
       }
+
       // remove no-content-header if existing
       // same element as noContentHeader
       let noContentHeadMsg = document.getElementsByClassName('no-content-header')[0]

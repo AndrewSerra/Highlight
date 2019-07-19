@@ -1,5 +1,6 @@
 const settings = {
-  storedItems: []
+  storedItems: [],
+  projects: {}
 }
 chrome.runtime.onInstalled.addListener(function() {
 

@@ -55,9 +55,14 @@ const isWindowSelected = (tab) => {
   return false;
 }
 
+const isNoteAlreadySaved = (currentNote, stored) => {
+  
+}
+
 export {
   updateList,
   setMultipleAttributes,
   isElementDefined,
   isWindowSelected,
+  isNoteAlreadySaved,
 }
