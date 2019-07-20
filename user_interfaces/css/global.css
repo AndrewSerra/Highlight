@@ -1,0 +1,15 @@
+html {
+  height: 600px;
+  width: 500px;
+}
+.highlight-container {
+  transform: scale(.5) rotate(-5deg) skew(-50deg);
+  background-color: yellow;
+}
+/*
+COLOR PALETTE
+BLACK #0E0B16
+NEON YELLOW
+NEON TURQUOISE #07F2F1
+GRAY #E7DFDD
+ */

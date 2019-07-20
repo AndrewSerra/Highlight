@@ -1,0 +1,42 @@
+body {
+  background-color: #E7DFDD88;
+}
+.navbar-brand {
+  height: 50px;
+  margin: 0 auto;
+  text-decoration: none;
+  color: black;
+}
+.navbar-title.highlight {
+  transform: scale(1.5) rotate(5deg) skew(45deg);
+}
+input.form-control {
+  /* border-top: 1px solid #f9f7f294;
+  border-bottom: 1px solid #f9f7f294; */
+  border-top: #f9f7f2;
+  border-bottom: #f9f7f2;
+  border-right: 2px solid #eeeeeedd;
+  border-left: 2px solid #eeeeeedd;
+}
+.input-group * {
+  background-color: #f9f7f2;
+  /* background-color: #f9f7f298; */
+  border-color: transparent;
+  color: #6c757c;
+}
+.navbar .btn-success[name="addBtn"] {
+  width: 100% !important;
+  display: block;
+  margin-top: 15px;
+}
+.input-group .input-group-prepend *,
+.input-group .input-group-append *:not(:last-child) {
+  background-color: transparent;
+}
+.project-container {
+  height: 60%;
+}
+.project-container .project-title {
+  margin-top: 15px;
+  margin-left: 15px;
+}
