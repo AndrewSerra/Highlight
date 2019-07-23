@@ -20,23 +20,24 @@
       <div class="input-group-prepend">
         <span class="input-group-text">Add</span>
       </div>
-      <input type="text" class="form-control" name="addText" placeholder="project name or note">
+      <input id="newNameField" type="text" class="form-control" name="addText" placeholder="project name or note" required>
       <div class="input-group-append">
         <span class="input-group-text">to</span>
       </div>
       <div class="input-group-append">
-        <select class="custom-select" id="navSelection">
-          <option selected>Choose...</option>
+        <select class="custom-select" id="selectionType">
+          <option value="0" selected>Choose...</option>
           <option value="1">Project</option>
           <option value="2">Note</option>
         </select>
       </div>
     </div>
-    <input class="btn btn-success"type="button" name="addBtn" value="Add to List">
+    <input class="btn btn-success" type="button" name="addBtn" id="addBtn" value="Add to List">
   </nav>
   <div class="project-container container">
     <h2 class="project-title">Projects</h2>
   </div>
-  <script type="text/javascript" src="bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script src="js/indexButtonAction.js" type="module"></script>
   </body>
 </html>

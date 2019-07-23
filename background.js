@@ -1,6 +1,19 @@
 const settings = {
-  storedItems: [],
-  projects: {}
+  storedItems: [], // array of objects
+  projects: [
+    {
+      id: 0,
+      name: "Data"
+    },
+    {
+      id: 1,
+      name: "Race"
+    },
+    {
+      id: 2,
+      name: "GAN"
+    }
+  ],    // array of objects
 }
 chrome.runtime.onInstalled.addListener(function() {
 

@@ -56,7 +56,27 @@ const isWindowSelected = (tab) => {
 }
 
 const isNoteAlreadySaved = (currentNote, stored) => {
+
+}
+
+const addProject = (newProjectName, projectsStored) => {
+
+  const { id, name } = projectsStored[projectsStored.length - 1];
+  let newId;
+
+  if(projectsStored.length === 0) {
+    newId = 0;
+  }
+  newId = id + 1;
+
+  const newProject = {
+    id: newId,
+    name: newProjectName
+  }
   
+  projectsStored.push(newProject);
+
+  return projectsStored;
 }
 
 export {
@@ -65,4 +85,5 @@ export {
   isElementDefined,
   isWindowSelected,
   isNoteAlreadySaved,
+  addProject,
 }

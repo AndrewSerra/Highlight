@@ -81,7 +81,7 @@ addBtn.onclick = () => {
         pageUrl: currentURL,
         highlight_text: highlightSelection,
         tag: tagSelection,
-        projectId: 0,
+        projectId: null,
       }
 
       // remove no-content-header if existing
