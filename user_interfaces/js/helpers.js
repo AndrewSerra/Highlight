@@ -1,38 +1,50 @@
-const updateList = (data_obj, dom_parent) => {
+const updateContainer = (name, data) => {
 
-  if(typeof data_obj !== 'object') {
-    throw "Function updateList has a parameter of type \"object\""
+  const containerName = `.${name}-container ul.list-group`;
+  const containerTag = document.querySelector(containerName);
+  console.log(containerTag)
+  let newTab = '';
+
+  // clean container
+  containerTag.innerHTML = '';
+
+  if(name === 'project') {
+    data.forEach((project) => {
+      newTab = addProjectTab(project);
+      containerTag.appendChild(newTab);
+    })
   }
-
-  let listItem = document.createElement("li")
-
-  // unslided view of the tab
-  let divHead = document.createElement("div")
-  let head = document.createElement("h3")
-  let span = document.createElement("span")
-
-  // slided view of the tab
-  let divHighlight = document.createElement("div")
-  let p = document.createElement("p")
-
-  head.innerHTML = data_obj.note
-  span.innerHTML = data_obj.pageUrl
-  p.innerHTML = data_obj.highlight_text
-
-  divHead.setAttribute("class", "list-item-div note")
-  divHighlight.setAttribute("class", "list-item-div highlight")
-
-  divHead.appendChild(head)
-  divHead.appendChild(span)
-  listItem.appendChild(divHead)
-
-  divHighlight.appendChild(p)
-  listItem.appendChild(divHighlight)
-
-  listItem.setAttribute("class", "list-item")
-
-  dom_parent.appendChild(listItem)
+  else if(name === 'note') {
+    newTab = addNoteTab(data);
+    containerTag.appendChild(newTab);
+  }
+  else if (name === 'note-untracked') {
+    newTab = addUntrackedNoteTab(data);
+    containerTag.appendChild(newTab);
+  }
+  else {
+    throw 'Container name is not valid.';
+  }
 }
+
+// NEEDS COMPLETION
+const addProjectTab = (project) => {
+  // <li class="list-group-item d-flex justify-content-between align-items-center">
+  //   Cras justo odio
+  //   <span class="badge badge-primary badge-pill">14</span>
+  // </li>
+  const li = document.createElement('li');
+
+  li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center');
+  li.innerHTML = (project.name).concat(`<span class="badge badge-primary badge-pill">${project.notes.length}</span>`);
+
+  return li;
+}
+
+const addNoteTab = (note) => {}
+
+const addUntrackedNoteTab = (untrackedNote) => {}
+////////////////////
 
 const setMultipleAttributes = (elem, attrs) => {
   for(let key in attrs) {
@@ -55,10 +67,6 @@ const isWindowSelected = (tab) => {
   return false;
 }
 
-const isNoteAlreadySaved = (currentNote, stored) => {
-
-}
-
 const addProject = (newProjectName, projectsStored) => {
 
   const { id, name } = projectsStored[projectsStored.length - 1];
@@ -71,19 +79,20 @@ const addProject = (newProjectName, projectsStored) => {
 
   const newProject = {
     id: newId,
-    name: newProjectName
+    name: newProjectName,
+    notes: []
   }
-  
+
   projectsStored.push(newProject);
 
+  updateContainer('project', projectsStored);
   return projectsStored;
 }
 
 export {
-  updateList,
+  updateContainer,
   setMultipleAttributes,
   isElementDefined,
   isWindowSelected,
-  isNoteAlreadySaved,
   addProject,
 }

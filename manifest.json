@@ -22,5 +22,6 @@
   "page_action": {
     "default_popup": "user_interfaces/index.html"
   },
+  "content_security_policy": "script-src 'self' https://kit.fontawesome.com/1ce4d7c438.js; object-src 'self'",
   "manifest_version": 2
 }

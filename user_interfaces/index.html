@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/global.css">
+  <script src="https://kit.fontawesome.com/1ce4d7c438.js"></script>
 </head>
 
 <body>
@@ -34,8 +35,22 @@
     </div>
     <input class="btn btn-success" type="button" name="addBtn" id="addBtn" value="Add to List">
   </nav>
-  <div class="project-container container">
-    <h2 class="project-title">Projects</h2>
+  <div class="notes-wrapper">
+    <div class="project-container container">
+      <h3 class="project-title">Projects</h3>
+      <ul class="list-group" onload="loadProjects()">
+
+      </ul>
+    </div>
+    <div class="note-untracked-container container">
+      <h3 class="note-untracked-title">Uncategorized Notes</h3>
+      <ul class="list-group" onload="loadUntrackedNotes()">
+
+      </ul>
+    </div>
+  </div>
+  <div class="note-untracked-btn-container container">
+    <button id="untrackedBtn" class="btn btn-primary" type="button" name="button">See Untracked Notes   <i class="fas fa-arrow-right"></i></button>
   </div>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script src="js/indexButtonAction.js" type="module"></script>

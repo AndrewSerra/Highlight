@@ -1,17 +1,20 @@
 const settings = {
-  storedItems: [], // array of objects
+  untrackedNotes: [], // array of objects
   projects: [
     {
       id: 0,
-      name: "Data"
+      name: "Data",
+      notes: []
     },
     {
       id: 1,
-      name: "Race"
+      name: "Race",
+      notes: []
     },
     {
       id: 2,
-      name: "GAN"
+      name: "GAN",
+      notes: []
     }
   ],    // array of objects
 }
