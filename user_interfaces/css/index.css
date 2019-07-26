@@ -27,10 +27,13 @@ input.form-control {
   border-bottom: 1px solid #f9f7f294; */
   border-top: #f9f7f2;
   border-bottom: #f9f7f2;
-  border-right: 2px solid #eeeeeedd;
-  border-left: 2px solid #eeeeeedd;
+  border-right: 4px solid #eeeeeedd;
+  border-left: 4px solid #eeeeeedd;
 }
-.input-group * {
+.input-group .input-group-prepend .input-group-text,
+.input-group .input-group-append .input-group-text,
+.input-group .form-control,
+.input-group .input-group-append .custom-select {
   background-color: #f9f7f2;
   /* background-color: #f9f7f298; */
   border-color: transparent;
@@ -41,10 +44,10 @@ input.form-control {
   display: block;
   margin-top: 15px;
 }
-.input-group .input-group-prepend *,
-.input-group .input-group-append *:not(:last-child) {
+/* .input-group .input-group-prepend *,
+.input-group .input-group-append * {
   background-color: transparent;
-}
+} */
 .project-container,
 .note-untracked-container {
   height: 60%;
