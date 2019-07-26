@@ -12,9 +12,16 @@
     "scripts": ["background.js"],
     "persistent": false
   },
+  "icons": {
+    "16": "icons/logo16.png",
+    "32": "icons/logo32.png",
+    "48": "icons/logo48.png",
+    "128": "icons/logo128.png"
+  },
   "options_page": "user_interfaces/options.html",
   "page_action": {
-    "default_popup": "user_interfaces/popup.html"
+    "default_popup": "user_interfaces/index.html"
   },
+  "content_security_policy": "script-src 'self' https://kit.fontawesome.com/1ce4d7c438.js; object-src 'self'",
   "manifest_version": 2
 }

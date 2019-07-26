@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/global.css">
+  <script src="https://kit.fontawesome.com/1ce4d7c438.js"></script>
+</head>
+
+<body>
+  <nav class="navbar">
+    <a class="navbar-brand" href="#">
+      <img src="../icons/logo16.png" alt="Highlight Icon">
+      <div class="highlight-container">
+        <h5 class="navbar-title highlight">Highlight</h5>
+      </div>
+    </a>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Add</span>
+      </div>
+      <input id="newNameField" type="text" class="form-control" name="addText" placeholder="project name or note" required>
+      <div class="input-group-append">
+        <span class="input-group-text">to</span>
+      </div>
+      <div class="input-group-append">
+        <select class="custom-select" id="selectionType">
+          <option value="0" selected>Choose...</option>
+          <option value="1">Project</option>
+          <option value="2">Note</option>
+        </select>
+      </div>
+    </div>
+    <input class="btn btn-success" type="button" name="addBtn" id="addBtn" value="Add to List">
+  </nav>
+  <div class="notes-wrapper">
+    <div class="project-container container">
+      <h3 class="project-title">Projects</h3>
+      <ul class="list-group" onload="loadProjects()">
+
+      </ul>
+    </div>
+    <div class="note-untracked-container container">
+      <h3 class="note-untracked-title">Uncategorized Notes</h3>
+      <ul class="list-group" onload="loadUntrackedNotes()">
+
+      </ul>
+    </div>
+  </div>
+  <div class="note-untracked-btn-container container">
+    <button id="untrackedBtn" class="btn btn-primary" type="button" name="button">See Untracked Notes   <i class="fas fa-arrow-right"></i></button>
+  </div>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script src="js/indexButtonAction.js" type="module"></script>
+  </body>
+</html>
