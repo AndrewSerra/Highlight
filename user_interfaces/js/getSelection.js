@@ -1,7 +1,18 @@
+/**
+* Returns true if the entered string is empty.
+* @param {String} note
+* @return {Boolean}
+*/
 const isNoteEmpty = (note) => {
   return note.trim().length === 0 ? true : false;
 }
 
+/**
+* Checks if the note is already created.
+* @param {Object} newNote
+* @param {Array<Object>} stored
+* @return {Boolean}
+*/
 const isNoteDuplicate = (newNote, stored) => {
 
   let isCreated = false;
@@ -12,20 +23,23 @@ const isNoteDuplicate = (newNote, stored) => {
           isCreated = true;
     }
   })
-
   return isCreated;
 }
 
+/**
+* Sends content script to webpage and receives
+* the highlighted section.
+* @param {String} note
+*/
 export const getSelection = (note) => {
-
-  const executeScriptObj = {
-    file: "user_interfaces/js/contentScripts/selectionInjection.js",
-  }
   let lastNote;
   let highlightSelection;
   let tagSelection;
   let currentURL;
 
+  const executeScriptObj = {
+    file: "user_interfaces/js/contentScripts/selectionInjection.js",
+  }
   // get the selection and text
   chrome.tabs.executeScript(null, executeScriptObj, (results) => {
     if (chrome.runtime.lastError || !results || !results.length) {
@@ -53,13 +67,15 @@ export const getSelection = (note) => {
         projectId: null,
       }
 
-      if(isNoteDuplicate(lastNote, data.untrackedNotes)){
-        alert("This selection is already saved.");
-      }
-      else {
-        data.untrackedNotes.push(lastNote);
-        chrome.storage.sync.set(data);
-      }
+      // if(isNoteDuplicate(lastNote, data.untrackedNotes)){
+      //   alert("This selection is already saved.");
+      // }
+      // else {
+      //   data.untrackedNotes.push(lastNote);
+      //   chrome.storage.sync.set(data);
+      // }
+      data.untrackedNotes.push(lastNote);
+      chrome.storage.sync.set(data);
     })
   });
 }

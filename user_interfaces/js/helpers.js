@@ -1,12 +1,25 @@
+/**
+* Returns the main container that the note is related
+* @param {String} name
+* @return {HTML Tag}
+*/
 const getContainer = (name) => {
   const containerName = `.${name}-container ul.list-group`;
   const tag = document.querySelector(containerName);
 
+  console.log(typeof tag);
+
   return tag
 }
-const updateContainer = (name, data) => {
 
-  const containerTag = getContainer(name);
+/**
+* Adds a new tab the the container targeted.
+* @param {String} containerName
+* @param {Array<Object>} data
+*/
+const updateContainer = (containerName, data) => {
+
+  const containerTag = getContainer(containerName);
   console.log(containerTag)
   let newTab = '';
 
@@ -37,6 +50,11 @@ const updateContainer = (name, data) => {
 }
 
 // NEEDS COMPLETION
+/**
+* Creates a new list item for a project.
+* @param {Object} project
+* @return {HTML Tag}
+*/
 const addProjectTab = (project) => {
   // <li class="list-group-item d-flex justify-content-between align-items-center">
   //   Cras justo odio
@@ -50,6 +68,11 @@ const addProjectTab = (project) => {
   return li;
 }
 
+/**
+* Creates a new list item for a note related to a project.
+* @param {Object} note
+* @return {HTML Tag}
+*/
 const addNoteTab = (note) => {
   const li = document.createElement('li');
 
@@ -59,6 +82,10 @@ const addNoteTab = (note) => {
   return li;
 }
 
+/**
+* Creates a new list item for a note NOT related to a project.
+* @param {Object} data
+*/
 const addUntrackedNoteTab = (data) => {
 
   const tag = getContainer('note-untracked');
