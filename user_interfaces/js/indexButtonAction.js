@@ -2,6 +2,7 @@ import {
   updateContainer,
   addProject
 } from './helpers.js';
+import { getSelection } from './getSelection.js';
 
 const selectionOptions = {
   1: "Project",
@@ -29,17 +30,26 @@ addBtn.onclick = () => {
         }
       })
       storedArr = addProject(inputBoxText, projects);
-      chrome.storage.sync.set({
-        "projects": storedArr
-      });
+      chrome.storage.sync.set({"projects": storedArr});
     });
-  } else {
+  }
+  else if(selectionOptions[selectionType] === "Note") {
+    // TODO: NEEDS COMPLETION
+    getSelection(inputBoxText);
+    chrome.storage.sync.get('untrackedNotes', (data) => {
+      const untracked = data.untrackedNotes;
+
+      addUntrackedNoteTab(untracked);
+    });
+  }
+  else {
     alert("Please select an option where it says \"Choose\"");
   }
 }
 
 document.body.onload = () => {
-  chrome.storage.sync.get('projects', (data) => {
+  chrome.storage.sync.get(['projects', 'untrackedNotes'], (data) => {
     updateContainer('project', data.projects);
+    updateContainer('note-untracked', data.untrackedNotes);
   })
 }

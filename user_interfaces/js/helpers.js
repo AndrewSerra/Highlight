@@ -1,7 +1,12 @@
+const getContainer = (name) => {
+  const containerName = `.${name}-container ul.list-group`;
+  const tag = document.querySelector(containerName);
+
+  return tag
+}
 const updateContainer = (name, data) => {
 
-  const containerName = `.${name}-container ul.list-group`;
-  const containerTag = document.querySelector(containerName);
+  const containerTag = getContainer(name);
   console.log(containerTag)
   let newTab = '';
 
@@ -15,12 +20,16 @@ const updateContainer = (name, data) => {
     })
   }
   else if(name === 'note') {
-    newTab = addNoteTab(data);
-    containerTag.appendChild(newTab);
+    data.forEach((note) => {
+      newTab = addNoteTab(data);
+      containerTag.appendChild(newTab);
+    })
   }
   else if (name === 'note-untracked') {
-    newTab = addUntrackedNoteTab(data);
-    containerTag.appendChild(newTab);
+    data.forEach((note_untracked) => {
+      newTab = addUntrackedNoteTab(data);
+      containerTag.appendChild(newTab);
+    })
   }
   else {
     throw 'Container name is not valid.';
@@ -41,9 +50,28 @@ const addProjectTab = (project) => {
   return li;
 }
 
-const addNoteTab = (note) => {}
+const addNoteTab = (note) => {
+  const li = document.createElement('li');
 
-const addUntrackedNoteTab = (untrackedNote) => {}
+  li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center');
+  // li.innerHTML = (untrackedNote.note).concat(`<span class="badge badge-primary badge-pill">${project.notes.length}</span>`);
+  li.innerHTML = untrackedNote.note;
+  return li;
+}
+
+const addUntrackedNoteTab = (data) => {
+
+  const tag = getContainer('note-untracked');
+
+  data.forEach((untrackedNote) => {
+    const li = document.createElement('li');
+
+    li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center');
+    // li.innerHTML = (untrackedNote.note).concat(`<span class="badge badge-primary badge-pill">${project.notes.length}</span>`);
+    li.innerHTML = untrackedNote.highlight_text;
+    tag.appendChild(li);
+  })
+}
 ////////////////////
 
 const setMultipleAttributes = (elem, attrs) => {
@@ -95,4 +123,5 @@ export {
   isElementDefined,
   isWindowSelected,
   addProject,
+  addUntrackedNoteTab,
 }
