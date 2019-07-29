@@ -1,6 +1,7 @@
-html {
+html, body {
   height: 600px;
   width: 500px;
+  overflow: hidden;
 }
 .highlight-container {
   transform: scale(.5) rotate(-5deg) skew(-50deg);

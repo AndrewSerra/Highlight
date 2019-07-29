@@ -11,8 +11,10 @@ const selectionOptions = {
 }
 const addBtn = document.getElementById("addBtn");
 
-addBtn.onclick = () => {
+addBtn.onclick = (event) => {
 
+  event.preventDefault();
+  
   const selectionType = document.getElementById("selectionType").value;
 
   let inputBoxText = document.getElementById("newNameField").value;

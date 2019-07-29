@@ -1,3 +1,8 @@
+import {
+  drag,
+  drop,
+  allowDrop
+} from './dragEvent.js';
 /**
 * Returns the main container that the note is related
 * @param {String} name
@@ -59,9 +64,11 @@ const addProjectTab = (project) => {
   //   <span class="badge badge-primary badge-pill">14</span>
   // </li>
   const li = document.createElement('li');
+  const deleteElement = '<span class="delete"><i class="far fa-trash-alt "></i></span>';
 
+  // li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center');
   li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center');
-  li.innerHTML = (project.name).concat(`<span class="badge badge-primary badge-pill">${project.notes.length}</span>`);
+  li.innerHTML = (project.name).concat(`<div class="delete-container"><span class="badge badge-primary badge-pill">${project.notes.length}</span>${deleteElement}</div>`);
 
   return li;
 }
@@ -85,18 +92,14 @@ const addNoteTab = (note) => {
 * @param {Object} data
 */
 const addUntrackedNoteTab = (untrackedNote) => {
-
-  // const tag = getContainer('note-untracked');
-
-  // data.forEach((untrackedNote) => {
     const li = document.createElement('li');
     console.log(untrackedNote)
     li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center');
+    li.setAttribute('draggable', true);
+    li.setAttribute('ondragstart', `"${drag}"`)
     // li.innerHTML = (untrackedNote.note).concat(`<span class="badge badge-primary badge-pill">${project.notes.length}</span>`);
     li.innerHTML = untrackedNote.highlightText;
-    // tag.appendChild(li);
     return li;
-  // })
 }
 ////////////////////
 
