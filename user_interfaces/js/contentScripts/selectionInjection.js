@@ -18,8 +18,12 @@
   // console.log(newText);
 
   const message = {
-    "msg": msg,
-    "tag": tag,
+    msg: msg,
+    tag: {
+      name: tag.tagName,
+      className: tag.className,
+      content: tag.innerHTML,
+    }
   }
 
   chrome.runtime.sendMessage("oakhfhjfahjedfbakjmoidejpfgamfgl", message, (response) => {

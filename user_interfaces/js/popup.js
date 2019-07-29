@@ -79,7 +79,7 @@ addBtn.onclick = () => {
       const lastNote = {
         note: note,
         pageUrl: currentURL,
-        highlight_text: highlightSelection,
+        highlightText: highlightSelection,
         tag: tagSelection,
         projectId: null,
       }

@@ -7,8 +7,6 @@ const getContainer = (name) => {
   const containerName = `.${name}-container ul.list-group`;
   const tag = document.querySelector(containerName);
 
-  console.log(typeof tag);
-
   return tag
 }
 
@@ -26,26 +24,26 @@ const updateContainer = (containerName, data) => {
   // clean container
   containerTag.innerHTML = '';
 
-  if(name === 'project') {
+  if(containerName === 'project') {
     data.forEach((project) => {
       newTab = addProjectTab(project);
       containerTag.appendChild(newTab);
     })
   }
-  else if(name === 'note') {
+  else if(containerName === 'note') {
     data.forEach((note) => {
-      newTab = addNoteTab(data);
+      newTab = addNoteTab(note);
       containerTag.appendChild(newTab);
     })
   }
-  else if (name === 'note-untracked') {
-    data.forEach((note_untracked) => {
-      newTab = addUntrackedNoteTab(data);
+  else if (containerName === 'note-untracked') {
+    data.forEach((noteUntracked) => {
+      newTab = addUntrackedNoteTab(noteUntracked);
       containerTag.appendChild(newTab);
     })
   }
   else {
-    throw 'Container name is not valid.';
+    throw 'helpers.js : Container name is not valid. in updateContainer';
   }
 }
 
@@ -86,18 +84,19 @@ const addNoteTab = (note) => {
 * Creates a new list item for a note NOT related to a project.
 * @param {Object} data
 */
-const addUntrackedNoteTab = (data) => {
+const addUntrackedNoteTab = (untrackedNote) => {
 
-  const tag = getContainer('note-untracked');
+  // const tag = getContainer('note-untracked');
 
-  data.forEach((untrackedNote) => {
+  // data.forEach((untrackedNote) => {
     const li = document.createElement('li');
-
+    console.log(untrackedNote)
     li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center');
     // li.innerHTML = (untrackedNote.note).concat(`<span class="badge badge-primary badge-pill">${project.notes.length}</span>`);
-    li.innerHTML = untrackedNote.highlight_text;
-    tag.appendChild(li);
-  })
+    li.innerHTML = untrackedNote.highlightText;
+    // tag.appendChild(li);
+    return li;
+  // })
 }
 ////////////////////
 
@@ -144,11 +143,19 @@ const addProject = (newProjectName, projectsStored) => {
   return projectsStored;
 }
 
+const addUntrackedNote = (newNote, notesStored) => {
+
+  notesStored.push(newNote);
+
+  updateContainer('note-untracked', notesStored);
+  return notesStored;
+}
+
 export {
   updateContainer,
   setMultipleAttributes,
   isElementDefined,
   isWindowSelected,
   addProject,
-  addUntrackedNoteTab,
+  addUntrackedNote,
 }

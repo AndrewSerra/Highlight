@@ -1,6 +1,7 @@
 import {
   updateContainer,
-  addProject
+  addProject,
+  addUntrackedNote
 } from './helpers.js';
 import { getSelection } from './getSelection.js';
 
@@ -23,7 +24,7 @@ addBtn.onclick = () => {
       let isProjectCreated = false;
 
       projects.forEach((project) => {
-        // exit if already created
+        // exit if note is already created
         if (project.name === inputBoxText) {
           isProjectCreated = true;
           alert("Project is already created");
@@ -35,12 +36,15 @@ addBtn.onclick = () => {
   }
   else if(selectionOptions[selectionType] === "Note") {
     // TODO: NEEDS COMPLETION
-    getSelection(inputBoxText);
-    chrome.storage.sync.get('untrackedNotes', (data) => {
-      const untracked = data.untrackedNotes;
+    getSelection(inputBoxText).then((lastNote) => {
+      console.log(lastNote)
+      chrome.storage.sync.get('untrackedNotes', (data) => {
+        const untrackedNotes = data.untrackedNotes;
 
-      addUntrackedNoteTab(untracked);
-    });
+        storedArr = addUntrackedNote(lastNote, untrackedNotes);
+        chrome.storage.sync.set({'untrackedNotes': storedArr});
+      });
+    })
   }
   else {
     alert("Please select an option where it says \"Choose\"");
