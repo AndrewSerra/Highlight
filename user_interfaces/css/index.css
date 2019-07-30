@@ -95,7 +95,7 @@ input.form-control {
   color: grey;
 }
 .list-group-item .delete i:hover {
-  color: red;
+  color: #ff5454;
 }
 .list-group-item .delete i,
 .list-group-item .delete i:hover {
