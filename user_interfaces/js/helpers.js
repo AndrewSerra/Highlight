@@ -1,8 +1,4 @@
-import {
-  drag,
-  drop,
-  allowDrop
-} from './dragEvent.js';
+import { setHandlers } from './dragEvent.js';
 /**
 * Returns the main container that the note is related
 * @param {String} name
@@ -30,8 +26,8 @@ const updateContainer = (containerName, data) => {
   containerTag.innerHTML = '';
 
   if(containerName === 'project') {
-    data.forEach((project) => {
-      newTab = addProjectTab(project);
+    data.forEach((project, index) => {
+      newTab = addProjectTab(project, index);
       containerTag.appendChild(newTab);
     })
   }
@@ -42,8 +38,8 @@ const updateContainer = (containerName, data) => {
     })
   }
   else if (containerName === 'note-untracked') {
-    data.forEach((noteUntracked) => {
-      newTab = addUntrackedNoteTab(noteUntracked);
+    data.forEach((noteUntracked, index) => {
+      newTab = addUntrackedNoteTab(noteUntracked, index);
       containerTag.appendChild(newTab);
     })
   }
@@ -58,7 +54,7 @@ const updateContainer = (containerName, data) => {
 * @param {Object} project
 * @return {HTML Tag}
 */
-const addProjectTab = (project) => {
+const addProjectTab = (project, index) => {
   // <li class="list-group-item d-flex justify-content-between align-items-center">
   //   Cras justo odio
   //   <span class="badge badge-primary badge-pill">14</span>
@@ -68,8 +64,10 @@ const addProjectTab = (project) => {
 
   // li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center');
   li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center');
-  li.innerHTML = (project.name).concat(`<div class="delete-container"><span class="badge badge-primary badge-pill">${project.notes.length}</span>${deleteElement}</div>`);
-
+  const liInnerHtml = `<span class="project-item" id=${index}>${project.name}</span><div class="delete-container"><span class="badge badge-primary badge-pill">${project.notes.length}</span>${deleteElement}</div>`
+  // li.innerHTML = (project.name).concat(`<div class="delete-container"><span class="badge badge-primary badge-pill">${project.notes.length}</span>${deleteElement}</div>`);
+  li.innerHTML = liInnerHtml;
+  
   return li;
 }
 
@@ -79,24 +77,20 @@ const addProjectTab = (project) => {
 * @return {HTML Tag}
 */
 const addNoteTab = (note) => {
-  const li = document.createElement('li');
 
-  li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center');
-  // li.innerHTML = (untrackedNote.note).concat(`<span class="badge badge-primary badge-pill">${project.notes.length}</span>`);
-  li.innerHTML = untrackedNote.note;
-  return li;
 }
 
 /**
 * Creates a new list item for a note NOT related to a project.
 * @param {Object} data
 */
-const addUntrackedNoteTab = (untrackedNote) => {
+const addUntrackedNoteTab = (untrackedNote, index) => {
     const li = document.createElement('li');
-    console.log(untrackedNote)
-    li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center');
+    // console.log(untrackedNote)
+    li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center note-list-item');
     li.setAttribute('draggable', true);
-    li.setAttribute('ondragstart', `"${drag}"`)
+    li.setAttribute('id', index)
+    // li.setAttribute('ondragstart', `"drag(event)"`)
     // li.innerHTML = (untrackedNote.note).concat(`<span class="badge badge-primary badge-pill">${project.notes.length}</span>`);
     li.innerHTML = untrackedNote.highlightText;
     return li;
@@ -151,7 +145,21 @@ const addUntrackedNote = (newNote, notesStored) => {
   notesStored.push(newNote);
 
   updateContainer('note-untracked', notesStored);
+  setHandlers();
   return notesStored;
+}
+
+const removeProject = (projectName, projectsStored) => {
+
+  let projectsStoredCopy = projectsStored;
+
+  projectsStoredCopy.forEach((project) => {
+    if(project.name === projectName) {
+      projectsStoredCopy.pop(project);
+    }
+  })
+
+  return projectsStoredCopy;
 }
 
 export {
@@ -161,4 +169,5 @@ export {
   isWindowSelected,
   addProject,
   addUntrackedNote,
+  removeProject
 }

@@ -4,6 +4,7 @@ import {
   addUntrackedNote
 } from './helpers.js';
 import { getSelection } from './getSelection.js';
+import { setHandlers } from './dragEvent.js';
 
 const selectionOptions = {
   1: "Project",
@@ -53,9 +54,11 @@ addBtn.onclick = (event) => {
   }
 }
 
-document.body.onload = () => {
+document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.sync.get(['projects', 'untrackedNotes'], (data) => {
     updateContainer('project', data.projects);
     updateContainer('note-untracked', data.untrackedNotes);
+
+    setHandlers();
   })
-}
+});

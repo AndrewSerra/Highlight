@@ -66,28 +66,6 @@ export const getSelection = async (note) => {
 
         console.log(highlightSelection)
 
-        /* retrieve the already stored value
-        // chrome.storage.sync.get('untrackedNotes', (data) => {
-        //   lastNote = {
-        //     note: note,
-        //     pageUrl: currentURL,
-        //     highlight_text: highlightSelection,
-        //     tag: tagSelection,
-        //     projectId: null,
-        //   }
-        //
-        //   // if(isNoteDuplicate(lastNote, data.untrackedNotes)){
-        //   //   alert("This selection is already saved.");
-        //   // }
-        //   // else {
-        //   //   data.untrackedNotes.push(lastNote);
-        //   //   chrome.storage.sync.set(data);
-        //   // }
-        //   data.untrackedNotes.push(lastNote);
-        //   chrome.storage.sync.set(data);
-        //
-        //   return lastNote;
-        })*/
         lastNote = {
           note: note,
           pageUrl: currentURL,
