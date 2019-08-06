@@ -1,4 +1,5 @@
-import { setDragHandlers } from './dragEvent.js';
+import { setHandlers } from './setHandlers.js';
+import { IDGenerator } from './IDGenerator.js';
 
 const getIdNumber = (query) => {
   const re = /\d+/;
@@ -33,8 +34,8 @@ const updateContainer = (containerName, data) => {
   containerTag.innerHTML = '';
 
   if(containerName === 'project') {
-    data.forEach((project, index) => {
-      newTab = addProjectTab(project, index);
+    data.forEach((project) => {
+      newTab = addProjectTab(project);
       containerTag.appendChild(newTab);
     })
   }
@@ -53,6 +54,7 @@ const updateContainer = (containerName, data) => {
   else {
     throw 'helpers.js : Container name is not valid. in updateContainer';
   }
+  setHandlers();
 }
 
 // NEEDS COMPLETION
@@ -61,7 +63,7 @@ const updateContainer = (containerName, data) => {
 * @param {Object} project
 * @return {HTML Tag}
 */
-const addProjectTab = (project, index) => {
+const addProjectTab = (project) => {
   // <li class="list-group-item d-flex justify-content-between align-items-center">
   //   Cras justo odio
   //   <span class="badge badge-primary badge-pill">14</span>
@@ -128,16 +130,9 @@ const isWindowSelected = (tab) => {
 
 const addProject = (newProjectName, projectsStored) => {
 
-  const { id, name } = projectsStored[projectsStored.length - 1];
-  let newId;
-
-  if(projectsStored.length === 0) {
-    newId = 0;
-  }
-  newId = id + 1;
-
+  const generator = new IDGenerator();
   const newProject = {
-    id: newId,
+    id: generator.generate(),
     name: newProjectName,
     notes: []
   }
@@ -145,6 +140,7 @@ const addProject = (newProjectName, projectsStored) => {
   projectsStored.push(newProject);
 
   updateContainer('project', projectsStored);
+  setHandlers();
   return projectsStored;
 }
 
@@ -153,7 +149,7 @@ const addUntrackedNote = (newNote, notesStored) => {
   notesStored.push(newNote);
 
   updateContainer('note-untracked', notesStored);
-  setDragHandlers();
+  setHandlers();
   return notesStored;
 }
 
@@ -167,6 +163,7 @@ const removeProject = (projectId, projectsStored) => {
     }
   })
   updateContainer('project', projectsStoredCopy);
+  setHandlers();
   return projectsStoredCopy;
 }
 

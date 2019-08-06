@@ -1,23 +1,8 @@
 const settings = {
-  untrackedNotes: [], // array of objects
-  projects: [
-    {
-      id: 0,
-      name: "Data",
-      notes: []
-    },
-    {
-      id: 1,
-      name: "Race",
-      notes: []
-    },
-    {
-      id: 2,
-      name: "GAN",
-      notes: []
-    }
-  ],    // array of objects
+  untrackedNotes: [],
+  projects: [],
 }
+
 chrome.runtime.onInstalled.addListener(function() {
 
   chrome.storage.sync.set(settings, function() {

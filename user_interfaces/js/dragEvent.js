@@ -19,8 +19,15 @@ const transferNoteToProject = (projectId, noteId) => {
   chrome.storage.sync.get(['untrackedNotes', 'projects'], (data) => {
     let projects = data.projects;
     let untrackedNotes = data.untrackedNotes;
+    let targetProject;
 
-    projects[projectId].notes.push(untrackedNotes[noteId]);
+
+    for(let i=0; i < projects.length; i++) {
+      if(projects[i].id === projectId) {
+        targetProject = projects[i];
+      }
+    }
+    targetProject.notes.push(untrackedNotes[noteId]);
     untrackedNotes.splice(noteId,1);
 
     updateContainer('project', projects);
