@@ -1,6 +1,7 @@
 # Highlight
 Chrome Extension that allows you to save websites and pieces of text to user later
 
+```
 Untracked Notes Structure - Array
 {
   note: <String>
@@ -14,3 +15,4 @@ Projects Structure - Array
   name: <String>
   notes: <Array<Untracked Notes Object>>
 }
+```
