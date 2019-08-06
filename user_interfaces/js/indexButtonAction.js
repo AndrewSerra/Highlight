@@ -4,7 +4,8 @@ import {
   addUntrackedNote
 } from './helpers.js';
 import { getSelection } from './getSelection.js';
-import { setHandlers } from './dragEvent.js';
+import { setDragHandlers } from './dragEvent.js';
+import { setDeleteProjectHandler } from './deleteProject.js';
 
 const selectionOptions = {
   1: "Project",
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateContainer('project', data.projects);
     updateContainer('note-untracked', data.untrackedNotes);
 
-    setHandlers();
+    setDragHandlers();
+    setDeleteProjectHandler();
   })
 });

@@ -1,4 +1,11 @@
-import { setHandlers } from './dragEvent.js';
+import { setDragHandlers } from './dragEvent.js';
+
+const getIdNumber = (query) => {
+  const re = /\d+/;
+
+  return re.exec(query).toString();
+}
+
 /**
 * Returns the main container that the note is related
 * @param {String} name
@@ -146,24 +153,25 @@ const addUntrackedNote = (newNote, notesStored) => {
   notesStored.push(newNote);
 
   updateContainer('note-untracked', notesStored);
-  setHandlers();
+  setDragHandlers();
   return notesStored;
 }
 
-const removeProject = (projectName, projectsStored) => {
+const removeProject = (projectId, projectsStored) => {
 
   let projectsStoredCopy = projectsStored;
 
-  projectsStoredCopy.forEach((project) => {
-    if(project.name === projectName) {
-      projectsStoredCopy.pop(project);
+  projectsStoredCopy.forEach((project, index) => {
+    if(project.id === projectId) {
+      projectsStoredCopy.splice(index, 1);
     }
   })
-
+  updateContainer('project', projectsStoredCopy);
   return projectsStoredCopy;
 }
 
 export {
+  getIdNumber,
   updateContainer,
   setMultipleAttributes,
   isElementDefined,

@@ -1,10 +1,4 @@
-import { updateContainer } from './helpers.js';
-
-const getIdNumber = (query) => {
-  const re = /\d+/;
-
-  return re.exec(query).toString();
-}
+import { getIdNumber, updateContainer } from './helpers.js';
 
 const getTargetQuery = async (event) => {
   return await new Promise((resolve, reject) => {
@@ -36,7 +30,7 @@ const transferNoteToProject = (projectId, noteId) => {
   })
 }
 
-const setHandlers = () => {
+const setDragHandlers = () => {
   const notesDOM = document.querySelectorAll('.note-list-item');
   const projectsDOM = document.querySelectorAll('.project-tab');
 
@@ -75,5 +69,5 @@ const setHandlers = () => {
 }
 
 export {
-  setHandlers
+  setDragHandlers
 }
