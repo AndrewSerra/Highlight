@@ -10,12 +10,13 @@ const selectionOptions = {
   1: "Project",
   2: "Note",
 }
-const addBtn = document.getElementById("addBtn");
+const addBtn = document.getElementById('addBtn');
 
+// adding note or project button
 addBtn.onclick = (event) => {
 
   event.preventDefault();
-  
+
   const selectionType = document.getElementById("selectionType").value;
 
   let inputBoxText = document.getElementById("newNameField").value;

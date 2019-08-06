@@ -74,6 +74,7 @@ input.form-control {
   background-color: #ffffff9e;
   border: 0;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 .project-container .list-group .list-group-item:not(:last-of-type) {
   margin-bottom: 5px;

@@ -19,7 +19,7 @@ const getContainer = (name) => {
 const updateContainer = (containerName, data) => {
 
   const containerTag = getContainer(containerName);
-  console.log(containerTag)
+  // console.log(containerTag)
   let newTab = '';
 
   // clean container
@@ -37,7 +37,7 @@ const updateContainer = (containerName, data) => {
       containerTag.appendChild(newTab);
     })
   }
-  else if (containerName === 'note-untracked') {
+  else if(containerName === 'note-untracked') {
     data.forEach((noteUntracked, index) => {
       newTab = addUntrackedNoteTab(noteUntracked, index);
       containerTag.appendChild(newTab);
@@ -63,11 +63,12 @@ const addProjectTab = (project, index) => {
   const deleteElement = '<span class="delete"><i class="far fa-trash-alt "></i></span>';
 
   // li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center');
-  li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center');
-  const liInnerHtml = `<span class="project-item" id=${index}>${project.name}</span><div class="delete-container"><span class="badge badge-primary badge-pill">${project.notes.length}</span>${deleteElement}</div>`
+  li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center project-tab');
+  li.setAttribute('id', `project-${project.id}`);
+  const liInnerHtml = `<span class="project-item">${project.name}</span><div class="delete-container"><span class="badge badge-primary badge-pill">${project.notes.length}</span>${deleteElement}</div>`
   // li.innerHTML = (project.name).concat(`<div class="delete-container"><span class="badge badge-primary badge-pill">${project.notes.length}</span>${deleteElement}</div>`);
   li.innerHTML = liInnerHtml;
-  
+
   return li;
 }
 
@@ -86,13 +87,13 @@ const addNoteTab = (note) => {
 */
 const addUntrackedNoteTab = (untrackedNote, index) => {
     const li = document.createElement('li');
-    // console.log(untrackedNote)
+
     li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center note-list-item');
     li.setAttribute('draggable', true);
-    li.setAttribute('id', index)
+    li.setAttribute('id', 'note-'.concat(index));
     // li.setAttribute('ondragstart', `"drag(event)"`)
     // li.innerHTML = (untrackedNote.note).concat(`<span class="badge badge-primary badge-pill">${project.notes.length}</span>`);
-    li.innerHTML = untrackedNote.highlightText;
+    li.innerHTML = `<h6>${untrackedNote.note}</h6><p>${untrackedNote.highlightText}</p>`
     return li;
 }
 ////////////////////

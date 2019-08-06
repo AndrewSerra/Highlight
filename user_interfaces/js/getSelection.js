@@ -71,7 +71,6 @@ export const getSelection = async (note) => {
           pageUrl: currentURL,
           highlightText: highlightSelection,
           tag: tagSelection,
-          projectId: null,
         }
         resolve(lastNote);
       });

@@ -1,57 +1,76 @@
+import { updateContainer } from './helpers.js';
 
-const getTargetNote = async (event) => {
+const getIdNumber = (query) => {
+  const re = /\d+/;
+
+  return re.exec(query).toString();
+}
+
+const getTargetQuery = async (event) => {
   return await new Promise((resolve, reject) => {
-    chrome.storage.sync.get('untrackedNotes', (data) => {
-      const notes = data.untrackedNotes;
-      const targetId = event.target.id;
+    let targetId = event.target.id;
+    let targetClassList = event.target.className.split(" ").join(".");
 
-      resolve({
-        target: notes[targetId],
-        all: notes
-      });
-    })
+    if(targetClassList === 'project-item') {
+      targetClassList = event.target.parentNode.className.split(" ").join(".");
+      targetId = event.target.parentNode.id;
+      // resolve(`.${targetClassList}`);
+    }
+
+    resolve(`#${targetId}.${targetClassList}`);
   })
 }
 
-const getTargetProject = async (event) => {
-  return await new Promise((resolve, reject) => {
-    chrome.storage.sync.get('projects', (data) => {
-      const projects = data.projects;
-      const targetId = event.target.id;
+const transferNoteToProject = (projectId, noteId) => {
+  chrome.storage.sync.get(['untrackedNotes', 'projects'], (data) => {
+    let projects = data.projects;
+    let untrackedNotes = data.untrackedNotes;
 
-      resolve({
-        target: projects[targetId],
-        all: projects
-      });
-    })
+    projects[projectId].notes.push(untrackedNotes[noteId]);
+    untrackedNotes.splice(noteId,1);
+
+    updateContainer('project', projects);
+    updateContainer('note-untracked', untrackedNotes);
+
+    chrome.storage.sync.set({projects: projects, untrackedNotes: untrackedNotes});
   })
 }
 
-// TODO: Complete drop event
-// TODO: Read about event.dataTransfer.setData
-// TODO: Complete notes part
 const setHandlers = () => {
   const notesDOM = document.querySelectorAll('.note-list-item');
-  const projectsDOM = document.querySelectorAll('.project-item');
+  const projectsDOM = document.querySelectorAll('.project-tab');
 
+  // DRAG START EVENT FOR UNTRACKED NOTES
+  for(let i=0; i < notesDOM.length; i++) {
+    notesDOM[i].addEventListener('dragstart', (event) => {
+      getTargetQuery(event)
+      .then((note) => {
+        event.dataTransfer.setData("text/plain", note);
+      })
+    });
+  }
+
+  //  DRAGOVER END AND DROP EVENT FOR PROJECTS
   for(let i=0; i < projectsDOM.length; i++) {
+    // console.log(projectsDOM[i])
     projectsDOM[i].addEventListener('dragover', (event) => {
        event.preventDefault();
     })
     projectsDOM[i].addEventListener('drop', (event) => {
+      event.preventDefault();
+      getTargetQuery(event)
+      .then((projectQuery) => {
+        const noteQuery = event.dataTransfer.getData("text");
+        // console.log('project async');
+        // console.log(projectQuery);
+        // console.log('note async');
+        // console.log(noteQuery);
+        const projectId = getIdNumber(projectQuery);
+        const noteId = getIdNumber(noteQuery);
 
-    })
-  }
-
-  for(let i=0; i < notesDOM.length; i++) {
-    notesDOM[i].addEventListener('dragstart', (event) => {
-      getTargetNote(event)
-      .then((notes) => {
-        console.log(notes.target);
-        console.log(notes.all);
-        // event.dataTransfer.setData("target", notes.target);
+        transferNoteToProject(projectId, noteId);
       })
-    });
+    })
   }
 }
 
