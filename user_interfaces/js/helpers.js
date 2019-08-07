@@ -155,13 +155,13 @@ const addUntrackedNote = (newNote, notesStored) => {
 
 const removeProject = (projectId, projectsStored) => {
 
-  let projectsStoredCopy = projectsStored;
+  let projectsStoredCopy = projectsStored
 
-  projectsStoredCopy.forEach((project, index) => {
-    if(project.id === projectId) {
-      projectsStoredCopy.splice(index, 1);
+  for(let i=0; i < projectsStoredCopy.length; i++) {
+    if(projectsStoredCopy[i].id === projectId) {
+      projectsStoredCopy.splice(i, 1);
     }
-  })
+  }
   updateContainer('project', projectsStoredCopy);
   setHandlers();
   return projectsStoredCopy;

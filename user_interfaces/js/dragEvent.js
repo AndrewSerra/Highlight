@@ -1,4 +1,5 @@
 import { getIdNumber, updateContainer } from './helpers.js';
+import { setHandlers } from './setHandlers.js';
 
 const getTargetQuery = async (event) => {
   return await new Promise((resolve, reject) => {
@@ -32,6 +33,7 @@ const transferNoteToProject = (projectId, noteId) => {
 
     updateContainer('project', projects);
     updateContainer('note-untracked', untrackedNotes);
+    setHandlers();
 
     chrome.storage.sync.set({projects: projects, untrackedNotes: untrackedNotes});
   })

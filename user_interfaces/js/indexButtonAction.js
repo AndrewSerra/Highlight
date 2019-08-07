@@ -34,8 +34,10 @@ addBtn.onclick = (event) => {
           alert("Project is already created");
         }
       })
-      storedArr = addProject(inputBoxText, projects);
-      chrome.storage.sync.set({"projects": storedArr});
+      if(!isProjectCreated) {
+        storedArr = addProject(inputBoxText, projects);
+        chrome.storage.sync.set({"projects": storedArr});
+      }
     });
   }
   else if(selectionOptions[selectionType] === "Note") {
@@ -59,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
   chrome.storage.sync.get(['projects', 'untrackedNotes'], (data) => {
     updateContainer('project', data.projects);
     updateContainer('note-untracked', data.untrackedNotes);
-
     setHandlers();
   })
 });

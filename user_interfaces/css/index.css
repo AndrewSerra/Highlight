@@ -55,6 +55,8 @@ input.form-control {
 .project-container,
 .note-untracked-container {
   height: auto;
+  padding-left: 5%;
+  padding-right:5%;
   margin-bottom: 10px;
   position: relative;
   display: inline-block;
