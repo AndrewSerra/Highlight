@@ -3,6 +3,48 @@ html, body {
   width: 450px;
   overflow: hidden;
 }
+.outer-container {
+  bottom: 15px;
+  right: 15px;
+  position: absolute;
+}
+.inner-container {
+  background: #09c999;
+  padding: 1em;
+  border-radius: 10px;
+  width: 160px;
+  height: 50px;
+  clip-path: circle(17% at 83% 50%);
+  transition: all .5s ease-in-out;
+  cursor: pointer;
+}
+.inner-container:hover {
+  clip-path: circle(95%);
+  background: #00B6FF;
+}
+.inner-container a {
+  text-decoration: none;
+  float: right;
+  margin-top: 2px;
+  margin-inline-end: 15px;
+  line-height: 50px;
+}
+.inner-container a h2 {
+  color: white;
+  margin: 0;
+  font-size: .9rem;
+}
+.inner-container span {
+  float: right;
+  color: white;
+  font-weight: bold;
+  transition: color .5s;
+  position: relative;
+  margin-right: 2%;
+}
+/* .inner-container:hover span {
+  color: rgba(255, 255, 255, 0);
+} */
 .highlight-container {
   transform: scale(.5) rotate(-5deg) skew(-50deg);
   background-color: yellow;

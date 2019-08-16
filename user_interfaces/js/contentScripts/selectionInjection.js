@@ -25,8 +25,8 @@
       content: tag.innerHTML,
     }
   }
-
-  chrome.runtime.sendMessage("oakhfhjfahjedfbakjmoidejpfgamfgl", message, (response) => {
+  //"nfkmbojaaajomcffekgbfjgfhpfigaom"
+  chrome.runtime.sendMessage(message, (response) => {
     console.log(response);
   });
 })();

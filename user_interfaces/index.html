@@ -10,6 +10,12 @@
 </head>
 
 <body>
+  <div class="outer-container">
+    <div class="inner-container">
+      <span><i class="far fa-sticky-note"></i></span>
+      <a href=""><h2>See All Notes</h2></a>
+    </div>
+  </div>
   <nav class="navbar">
     <a class="navbar-brand" href="#">
       <img src="../icons/logo16.png" alt="Highlight Icon">
@@ -17,40 +23,40 @@
         <h5 class="navbar-title highlight">Highlight</h5>
       </div>
     </a>
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Add</span>
+    <div class="container">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Add</span>
+        </div>
+        <input id="newNameField" type="text" class="form-control" name="addText" placeholder="note or project name" required>
+        <div class="input-group-append">
+          <span class="input-group-text">to</span>
+        </div>
+        <div class="input-group-append">
+          <select class="custom-select" id="selectionType">
+            <option value="0" selected>Choose...</option>
+            <option value="1">Projects</option>
+            <option value="2">Notes</option>
+          </select>
+        </div>
       </div>
-      <input id="newNameField" type="text" class="form-control" name="addText" placeholder="note or project name" required>
-      <div class="input-group-append">
-        <span class="input-group-text">to</span>
-      </div>
-      <div class="input-group-append">
-        <select class="custom-select" id="selectionType">
-          <option value="0" selected>Choose...</option>
-          <option value="1">Projects</option>
-          <option value="2">Notes</option>
-        </select>
-      </div>
+      <input class="btn btn-success" type="button" name="addBtn" id="addBtn" value="Add to List">
     </div>
-    <input class="btn btn-success" type="button" name="addBtn" id="addBtn" value="Add to List">
   </nav>
   <div class="notes-wrapper">
     <div class="project-container container">
-      <h3 class="project-title">Projects</h3>
+      <h5 class="project-title">Projects</h5>
       <ul class="list-group">
 
       </ul>
     </div>
     <div class="note-untracked-container container">
-      <h3 class="note-untracked-title">Uncategorized Notes</h3>
+      <h5 class="note-untracked-title">Uncategorized Notes</h5>
       <ul class="list-group">
 
       </ul>
     </div>
   </div>
-  <!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
   <script src="js/indexButtonAction.js" type="module"></script>
-  <script src="js/deleteProject.js" type="module"></script>
   </body>
 </html>

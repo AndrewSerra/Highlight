@@ -1,6 +1,9 @@
 html,body {
   background-color: #E7DFDD88;
 }
+* {
+  font-family: 'Arial', sans-serif;
+}
 .navbar-brand {
   /* height: 50px; */
   margin: 0 auto;
@@ -39,10 +42,10 @@ input.form-control {
   border-color: transparent;
   color: #6c757c;
 }
-.navbar .btn-success[name="addBtn"] {
+.btn-success[name="addBtn"] {
   width: 100% !important;
   display: block;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 /* .input-group .input-group-prepend *,
 .input-group .input-group-append * {
@@ -50,7 +53,7 @@ input.form-control {
 } */
 .notes-wrapper {
   overflow-y: auto;
-  height: 450px;
+  margin-bottom: 250px;
 }
 .project-container,
 .note-untracked-container {
@@ -64,7 +67,7 @@ input.form-control {
 .project-container .project-title,
 .note-untracked-container .note-untracked-title {
   margin-top: 15px;
-  margin-left: 15px;
+  margin-left: 25px;
 }
 /* .project-container .list-group,
 .note-untracked-container .list-group {
@@ -72,7 +75,7 @@ input.form-control {
   overflow-y: scroll;
 } */
 .project-container .list-group .list-group-item {
-  height: 60px;
+  height: 45px;
   background-color: #ffffff9e;
   border: 0;
   border-radius: 5px;

@@ -23,7 +23,7 @@ addBtn.onclick = (event) => {
   let storedArr;
 
   if (selectionOptions[selectionType] === "Project") {
-    chrome.storage.sync.get('projects', (data) => {
+    chrome.storage.sync.get(['projects', 'userId'], (data) => {
       const projects = data.projects;
       let isProjectCreated = false;
 

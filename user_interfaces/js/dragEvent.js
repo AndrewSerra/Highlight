@@ -55,7 +55,6 @@ const setDragHandlers = () => {
 
   //  DRAGOVER END AND DROP EVENT FOR PROJECTS
   for(let i=0; i < projectsDOM.length; i++) {
-    // console.log(projectsDOM[i])
     projectsDOM[i].addEventListener('dragover', (event) => {
        event.preventDefault();
     })

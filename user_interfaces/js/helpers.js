@@ -64,18 +64,13 @@ const updateContainer = (containerName, data) => {
 * @return {HTML Tag}
 */
 const addProjectTab = (project) => {
-  // <li class="list-group-item d-flex justify-content-between align-items-center">
-  //   Cras justo odio
-  //   <span class="badge badge-primary badge-pill">14</span>
-  // </li>
   const li = document.createElement('li');
   const deleteElement = '<span class="delete"><i class="far fa-trash-alt "></i></span>';
 
-  // li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center');
   li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center project-tab');
   li.setAttribute('id', `project-${project.id}`);
   const liInnerHtml = `<span class="project-item">${project.name}</span><div class="delete-container"><span class="badge badge-primary badge-pill">${project.notes.length}</span>${deleteElement}</div>`
-  // li.innerHTML = (project.name).concat(`<div class="delete-container"><span class="badge badge-primary badge-pill">${project.notes.length}</span>${deleteElement}</div>`);
+
   li.innerHTML = liInnerHtml;
 
   return li;
