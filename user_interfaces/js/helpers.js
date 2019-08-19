@@ -1,5 +1,5 @@
 import { setHandlers } from './setHandlers.js';
-import { IDGenerator } from './IDGenerator.js';
+import { IDGenerator } from './IdGenerator.js';
 
 const getIdNumber = (query) => {
   const re = /\d+/;
